@@ -10,6 +10,7 @@ BINDIR=$(PREFIX)/sbin
 RCDIR=$(PREFIX)/etc/rc.d
 MANDIR=$(PREFIX)/man/man8
 MKDIR=mkdir
+REMOVE=/bin/rm -f
 
 SCRIPTS=iohyve
 SCRIPTSDIR=${PREFIX}/BINDIR
@@ -26,5 +27,10 @@ install:: all
 #	$(INSTALL) -c ${.OBJDIR}/lib/* $(FILESDIR)/
 	$(INSTALL) -c ${.OBJDIR}/rc.d/* $(RCDIR)/
 	$(INSTALL) -c $(MAN).gz $(MANDIR)/
+
+deinstall:
+	$(REMOVE) $(BINDIR)/$(SCRIPTS)
+	$(REMOVE) $(RCDIR)/iohyve
+	$(REMOVE) $(MANDIR)/$(MAN).gz
 
 .include <bsd.prog.mk>
